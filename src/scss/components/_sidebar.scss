@@ -1,0 +1,42 @@
+.Sidebar {
+    width: $offCanvas;
+    height: 100vh;
+    padding: 2rem;
+    position: absolute;
+    left: -$offCanvas;
+    background-color: $firstColor;
+    transition: left .2s;
+
+    &.active {
+        left: 0;
+    }
+
+    @include from(x-large){
+        position: fixed;
+        left: 0;
+    }
+
+    &.active {
+        left: 0;
+    }
+
+    &__logo {
+        background-color: $secondColor;
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-bottom: 2rem;
+        border-radius: 4px;
+    }
+
+    &__item {
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        font-size: 2rem;
+        color: #fff;
+        
+        &:hover {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+}

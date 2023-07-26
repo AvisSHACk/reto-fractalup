@@ -1,0 +1,27 @@
+main {
+    margin-top: 6rem;
+    padding: 2rem 2rem;
+    width: 100%;
+    @include from(x-large){
+        width: calc(100% - $offCanvas);
+        margin-left: $offCanvas;
+        padding: 2rem 6rem;
+    }
+}
+
+.Main__icon {
+    @include from(x-large){
+        display: none;
+    }
+    position: absolute;
+    top: 4%;
+    right: 4%;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
