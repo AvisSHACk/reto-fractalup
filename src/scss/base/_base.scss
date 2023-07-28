@@ -12,7 +12,7 @@ html {
 body {
     margin: 0;
     font-size: 1.6rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: $bgColor;
     color: #000;
 }
@@ -48,4 +48,11 @@ button {
 
 h1, h2, h3, h4 {
     margin: 0;
+}
+
+ul {
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
 }

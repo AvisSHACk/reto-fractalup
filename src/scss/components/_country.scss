@@ -1,8 +1,20 @@
 .Country {
-    border-radius: 20px;
+    border-radius: 30px;
     overflow: hidden;
     box-shadow: 0px 2px 11px 0px rgba(0,0,0,0.75);
     cursor: pointer;
+
+    &.active &__info{
+        background-color: $accentColor;
+    }
+
+    &.active &__title{
+        color: #fff;
+    }
+
+    &.active &__description{
+        color: #fff;
+    }
 
     &__imagen {
         height: 140px;
@@ -16,12 +28,35 @@
     &__info {
         padding: 2rem;
         background-color: #fff;
+
+        &--more {
+            position: fixed;
+            top: 50%;   
+            left: 50%;
+            width: 80%;
+            transform: translate(-50%, -50%);
+
+            @include from(x-large) {
+                position: static;
+                width: auto;
+                transform: translate(0);
+            }
+        }
+        
+        figure {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__flag {
+        width: 50px;
+        margin-right: 1rem;
     }
 
     &__title {
         display: flex;
         flex-direction: column;
-        
     }
 
     &__title,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Main from "./componentes/Main";
 import Sidebar from "./componentes/Sidebar";
+import { CountriesProvider } from "./context/CountriesContext";
 
 function App() {
 
@@ -8,8 +9,10 @@ function App() {
 
   return (
     <div className="App">
-      <Sidebar sidebarState={sidebarState}/>
-      <Main sidebarState={sidebarState} changeSidebarState={changeSidebarState}/>
+      <CountriesProvider>
+        <Sidebar sidebarState={sidebarState}/>
+        <Main sidebarState={sidebarState} changeSidebarState={changeSidebarState}/>
+      </CountriesProvider>
     </div>
   );
 }
