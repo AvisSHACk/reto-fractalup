@@ -1,9 +1,9 @@
-const CountryInfo = ({countryInfoCurrent, changeCountryInfoCurrent, changeCountryCurrent}) => {
+const CountryInfo = ({countryInfoCurrent, cleanCountryCurrent}) => {
 
     const close = () => {
-        changeCountryCurrent(undefined)
-        changeCountryInfoCurrent(undefined)
+        cleanCountryCurrent()
     }
+    
     return (
         <div className='Country__info Country__info--more'>
             <div className="Country__close" onClick={() => close()}>x</div>

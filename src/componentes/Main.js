@@ -1,43 +1,32 @@
 import { FiMenu } from 'react-icons/fi';
-import { useLazyQuery } from "@apollo/client";
 import Country from './Country';
-import CountryInfo from './CountryInfo';
-import { useEffect, useState } from 'react';
-import { MYCOUNTRY } from '../querys/MyCountry';
+import { useState } from 'react';
 import Search from './Search';
 import useGetCountries from '../hooks/useCountries';
+import useCountryInfoCurrent from '../hooks/useCountryInfoCurrent';
+import CountryInfo from './CountryInfo';
 
 
 const Main = ({sidebarState, changeSidebarState}) => {
-    const [search, changeSearch] = useState("");
-    const [countryCurrent, changeCountryCurrent] = useState();
-    const [countryInfoCurrent, changeCountryInfoCurrent] = useState();
-    const [getCountry, result] = useLazyQuery(MYCOUNTRY);
-
     const {countries, loading} = useGetCountries();
+    const {countryCurrent, 
+        showCountry, 
+        countryInfoCurrent, 
+        cleanCountryCurrent} = useCountryInfoCurrent();
+        
+    const [search, changeSearch] = useState("");
 
-    const showCountry = (code) => {
-        changeCountryCurrent(code)
-        getCountry({variables: {codeBySearch: code}})
+    const handleClick = (code) => {
+        showCountry(code)
     }
-
-    useEffect(() => {
-
-        if(result.data) {
-            changeCountryInfoCurrent(result.data.country)
-        }
-
-    }, [result])
-
-   
-
+    
     return ( 
         <main>
             <div className='Main__icon' onClick={() => changeSidebarState(!sidebarState)}>
                 <FiMenu/>
             </div>
             
-           <Search changeSearch={changeSearch}/>
+           <Search search={ search } changeSearch={changeSearch}/>
 
            {loading && <div className="loader"></div>}
 
@@ -52,17 +41,16 @@ const Main = ({sidebarState, changeSidebarState}) => {
                                 key={country.code}
                                 active={country.code === countryCurrent}
                                 country={country} 
-                                showCountry={showCountry}
+                                handleClick={handleClick}
                             />
                         )
                     }
                 </div>
 
                 {countryInfoCurrent && 
-                    <CountryInfo 
+                    <CountryInfo
                         countryInfoCurrent={countryInfoCurrent} 
-                        changeCountryInfoCurrent={changeCountryInfoCurrent}
-                        changeCountryCurrent={changeCountryCurrent}
+                        cleanCountryCurrent={cleanCountryCurrent}
                     />
                 }
                 

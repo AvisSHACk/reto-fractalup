@@ -1,7 +1,7 @@
-const Country = ({active, country, showCountry}) => {
+const Country = ({active, country, handleClick}) => {
 
     return (
-        <article className={`Country ${active && 'active'}`} onClick={() => showCountry(country.code)}>
+        <article className={`Country ${active && 'active'}`} onClick={() => handleClick(country.code)}>
             <div className="Country__imagen">
                 <img src="https://picsum.photos/200/100" alt="" />
             </div>

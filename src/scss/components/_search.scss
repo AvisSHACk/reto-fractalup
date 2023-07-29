@@ -77,15 +77,23 @@
 
     &__filtersContainer {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         margin-top: 2rem;
         gap: 2rem;
 
+        @include from(x-large) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
         img {
             border-radius: 20px;
-            border: 1px solid $accentColor;
             cursor: pointer;
             margin-bottom: 1rem;
+            border: 2px solid $firstColor;
+
+            &.active {
+                border: 2px solid $accentColor;
+            }
         }
     }
 }

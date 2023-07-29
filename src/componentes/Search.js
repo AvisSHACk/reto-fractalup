@@ -4,7 +4,7 @@ import { useLazyQuery, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { BYCONTINENT } from '../querys/ByContinent';
 import useGetCountries from '../hooks/useCountries';
-const Search = ({changeSearch}) => {
+const Search = ({search, changeSearch}) => {
     const {data} = useQuery(CONTINENTS);
     const [getCountry, result] = useLazyQuery(BYCONTINENT);
     const [codesContinents, changeCodeContinents] = useState([]);
@@ -24,6 +24,11 @@ const Search = ({changeSearch}) => {
 
     }, [result, changeCountries])
 
+    const changeInput = (e) => {
+        changeSearch(e.target.value)
+        changeOpenFiltered(e.target.value !== '' ? false : true)
+    }
+
     const addCodeContinent = (code) => {
         changeCodeContinents(
             [
@@ -31,6 +36,10 @@ const Search = ({changeSearch}) => {
                 code
             ]
         )
+    }
+
+    const activateContinent = (e) => {
+        e.currentTarget.classList.toggle('active');
     }
     return (
         <form className="Search" onSubmit={showCountries}>
@@ -41,9 +50,9 @@ const Search = ({changeSearch}) => {
                     name="pais" 
                     id="pais"
                     autoComplete='off'
-                    onChange={e => changeSearch(e.target.value)}
-                    onClick={() => changeOpenFiltered(true)}
-                    // onBlur={() => changeOpenFiltered(false)}
+                    onChange={e => changeInput(e)}
+                    value={search}
+                    onClick={() => changeOpenFiltered(!openFiltered)}
                     placeholder="Escriba el pais que desea ver"
                 />
              </label>
@@ -58,7 +67,7 @@ const Search = ({changeSearch}) => {
                 <div className="Search__filtersContainer">
                     {data && data.continents.map((continent) => (
                         <figure key={continent.code} onClick={() => addCodeContinent(continent.code)}>
-                            <img src="https://whsrn.org/wp-content/uploads/2018/12/cec-map_atlantic_small.jpg" alt="" />
+                            <img className="Search__continentimg" onClick={activateContinent} src="https://whsrn.org/wp-content/uploads/2018/12/cec-map_atlantic_small.jpg" alt="" />
                             <figcaption>
                                 {continent.name}
                             </figcaption>
